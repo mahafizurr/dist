@@ -3,7 +3,7 @@ export async function getServerSideProps({ params }) {
   const { employeeId } = params;
 
   const response = await fetch(
-    `http://localhost:3000/api/employees?employeeId=${employeeId}`
+    `https://www.chapaibar.com/api/employees?employeeId=${employeeId}`
   );
   const employee = await response.json();
 

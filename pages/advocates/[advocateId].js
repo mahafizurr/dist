@@ -5,7 +5,7 @@ export async function getServerSideProps({ params }) {
   const { advocateId } = params;
 
   const response = await fetch(
-    `http://localhost:3000/api/advocates?advocateId=${advocateId}`
+    `https://www.chapaibar.com/api/advocates?advocateId=${advocateId}`
   );
   const advocate = await response.json();
 

@@ -1,7 +1,7 @@
 import NoticeTable from "@/components/NoticeTable";
 
 export async function getServerSideProps() {
-  const response = await fetch("http://localhost:3000/api/notices");
+  const response = await fetch("https://www.chapaibar.com/api/notices");
   const notices = await response.json();
 
   return {

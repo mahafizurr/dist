@@ -5,7 +5,7 @@ export async function getServerSideProps({ params }) {
   const { noticeId } = params;
 
   const response = await fetch(
-    `http://localhost:3000/api/notices?noticeId=${noticeId}`
+    `https://www.chapaibar.com/notices?noticeId=${noticeId}`
   );
   const notice = await response.json();
 

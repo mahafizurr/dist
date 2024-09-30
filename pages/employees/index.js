@@ -2,7 +2,7 @@ import EmployeeTable from "@/components/EmployeeTable";
 import Link from "next/link";
 
 export async function getServerSideProps() {
-  const response = await fetch("http://localhost:3000/api/employees");
+  const response = await fetch("https://www.chapaibar.com/api/employees");
   const employees = await response.json();
 
   return {
