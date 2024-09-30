@@ -8,7 +8,7 @@ const Header = () => {
   const router = useRouter();
   return (
     <>
-      <div className="scroll-smooth focus:scroll-auto">
+      <div className="container max-w-full scroll-smooth focus:scroll-auto">
         <div className="flex justify-center items-center border-b-2 border-orange-300 px-8 py-2 bg-gray-100 text-green-900 text-sm">
           <div className="flex items-center space-x-4">
             <FontAwesomeIcon icon={faPhoneAlt} aria-hidden="true" />
@@ -20,7 +20,7 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="grid justify-center mt-4 animate-fadeIn">
+        <div className="grid justify-center mt-2 animate-fadeIn">
           <img
             src="/headerlogo.png"
             alt="Chapai Bar logo"
