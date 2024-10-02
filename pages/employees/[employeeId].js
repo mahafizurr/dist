@@ -29,93 +29,44 @@ export default function Employee({ employee }) {
   }
 
   return (
-    <div style={styles.container}>
-      <div style={styles.photoContainer}>
-        <img
-          src={employee.img}
-          alt={`${employee.name}'s photo`}
-          style={styles.photo}
-        />
-      </div>
-      <div style={styles.detailsContainer}>
-        <h1 style={styles.title}>{employee.name}</h1>
-        <p style={styles.detail}>
-          <strong>Designation:</strong> {employee.designation}
-        </p>
-        <p style={styles.detail}>
-          <strong>Mobile Number:</strong> {employee.mobile}
-        </p>
-        <p style={styles.detail}>
-          <strong>Father's Name:</strong> {employee.fatherName}
-        </p>
-        <p style={styles.detail}>
-          <strong>Address:</strong> {employee.address}
-        </p>
+    <div className="container mx-auto px-4 py-8">
+      <div className="md:flex justify-center items-center space-x-6">
+        {/* Employee Photo */}
+        <div className="flex-shrink-0">
+          <img
+            src={employee.img}
+            alt={`${employee.name}'s photo`}
+            className="w-32 h-32 md:w-48 md:h-48 rounded-md object-cover shadow-lg"
+          />
+        </div>
 
-        <button style={styles.backButton} onClick={() => router.back()}>
-          Back to list
-        </button>
+        {/* Employee Details */}
+        <div className="mt-6 md:mt-0">
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">
+            {employee.name}
+          </h1>
+          <p className="text-gray-600 mb-1">
+            <strong>Designation:</strong> {employee.designation}
+          </p>
+          <p className="text-gray-600 mb-1">
+            <strong>Mobile Number:</strong> {employee.mobile}
+          </p>
+          <p className="text-gray-600 mb-1">
+            <strong>Father's Name:</strong> {employee.fatherName}
+          </p>
+          <p className="text-gray-600 mb-1">
+            <strong>Address:</strong> {employee.address}
+          </p>
+
+          {/* Back Button */}
+          <button
+            onClick={() => router.back()}
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200"
+          >
+            Back to list
+          </button>
+        </div>
       </div>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    maxWidth: "800px",
-    margin: "0 auto",
-    padding: "20px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    textAlign: "center",
-  },
-  photoContainer: {
-    marginBottom: "20px",
-  },
-  photo: {
-    width: "100%",
-    maxWidth: "300px",
-    borderRadius: "8px",
-  },
-  detailsContainer: {
-    width: "100%",
-  },
-  title: {
-    fontSize: "2em",
-    marginBottom: "10px",
-  },
-  detail: {
-    fontSize: "1.1em",
-    margin: "10px 0",
-  },
-  backButton: {
-    marginTop: "20px",
-    padding: "10px 20px",
-    fontSize: "1em",
-    backgroundColor: "#0070f3",
-    color: "white",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
-};
-
-// CSS media queries for responsiveness
-const mediaStyles = `
-    @media (max-width: 600px) {
-      .container {
-        padding: 10px;
-      }
-      .title {
-        font-size: 1.5em;
-      }
-      .photo {
-        max-width: 100%;
-      }
-      .backButton {
-        width: 100%;
-        padding: 12px 0;
-      }
-    }
-  `;

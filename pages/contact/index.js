@@ -8,8 +8,8 @@ import {
 
 const Contact = () => {
   return (
-    <div className="container px-4 py-4 md:py-8">
-      <h1 className="text-3xl font-bold mb-6 text-center text-sky-900 border-b-2 border-orange-300">
+    <div className="container max-auto px-4 py-4 md:py-8">
+      <h1 className="container max-auto text-3xl font-bold mb-6 text-center text-sky-900 border-b-2 border-orange-300">
         Contact Us
       </h1>
 

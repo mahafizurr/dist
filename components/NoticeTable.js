@@ -27,7 +27,7 @@ const getFilePreview = (fileUrl) => {
 
 const NoticeTable = ({ notices = [] }) => {
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto">
       {notices.length > 0 ? (
         notices.map((notice) => (
           <div

@@ -4,22 +4,48 @@ import { useRouter } from "next/router";
 export async function getServerSideProps({ params }) {
   const { noticeId } = params;
 
-  const response = await fetch(
-    `https://www.chapaibar.com/notices?noticeId=${noticeId}`
-  );
-  const notice = await response.json();
+  try {
+    const response = await fetch(
+      `https://www.chapaibar.com/notices?noticeId=${noticeId}`
+    );
 
-  if (!notice || notice.error) {
+    // Check if the response is successful
+    if (!response.ok) {
+      // If the response status is not in the range of 2xx
+      return {
+        notFound: true, // Trigger a 404 page if there is a server error
+      };
+    }
+
+    // Check if the response content type is JSON
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      return {
+        notFound: true, // Trigger a 404 page if the content is not JSON
+      };
+    }
+
+    const notice = await response.json();
+
+    // If the notice data is invalid or there's an error in the response
+    if (!notice || notice.error) {
+      return {
+        notFound: true,
+      };
+    }
+
     return {
-      notFound: true, // Will trigger a 404 page if notice is not found
+      props: {
+        notice,
+      },
+    };
+  } catch (error) {
+    // Handle any network or server errors here
+    console.error("Error fetching notice:", error);
+    return {
+      notFound: true, // Trigger a 404 page if there's an error
     };
   }
-
-  return {
-    props: {
-      notice,
-    },
-  };
 }
 
 const getFilePreview = (fileUrl) => {
@@ -55,7 +81,7 @@ export default function noticeDetails({ notice }) {
   }
 
   return (
-    <div className="border border-gray-200 p-6 rounded-md shadow-lg bg-white">
+    <div className="border border-gray-200 p-6 rounded-md shadow-lg bg-white max-w-lg mx-auto">
       <h2 className="text-xl font-bold text-gray-800 mb-2">
         {notice.file_name}
       </h2>
@@ -68,25 +94,39 @@ export default function noticeDetails({ notice }) {
           day: "2-digit",
         })}
       </p>
-      <div className="mt-4">{getFilePreview(notice.file_url)}</div>
-      <div className="mt-6 flex space-x-4">
-        <a
-          href={notice.file_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-all shadow"
-        >
-          Preview
-        </a>
-        <a
-          href={notice.file_url}
-          download
-          className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-all shadow"
-        >
-          Download
-        </a>
+
+      {/* File Preview */}
+      {notice.file_url ? (
+        <div className="mt-4">{getFilePreview(notice.file_url)}</div>
+      ) : (
+        <p className="mt-4 text-gray-500">No file available for this notice.</p>
+      )}
+
+      {/* Action Buttons */}
+      {notice.file_url && (
+        <div className="mt-6 flex space-x-4 justify-center">
+          <a
+            href={notice.file_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-all shadow"
+          >
+            Preview
+          </a>
+          <a
+            href={notice.file_url}
+            download
+            className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-all shadow"
+          >
+            Download
+          </a>
+        </div>
+      )}
+
+      {/* Back Button */}
+      <div className="mt-6 flex justify-center">
         <button
-          className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-all shadow"
+          className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-all shadow"
           onClick={() => router.back()}
         >
           Back to list
