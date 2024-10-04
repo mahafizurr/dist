@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../lib/supabaseClient";
 import Link from "next/link";
 
 export default function NoticeList() {
@@ -7,18 +6,20 @@ export default function NoticeList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Fetch notices from the API
   const fetchNotices = async () => {
     setLoading(true);
     setError(null); // Reset error state
     try {
-      const { data, error } = await supabase
-        .from("dist_data_table")
-        .select("*");
-      if (error) throw error;
-
+      const response = await fetch(`https://www.chapaibar.com/notices`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch notices");
+      }
+      const data = await response.json(); // Parse the response data
       setNotices(data || []); // Set default if no data
     } catch (err) {
-      setError("Failed to fetch notices");
+      setError("Failed to fetch notices. Please try again later.");
+      console.error("Error fetching notices:", err); // Log the actual error
     } finally {
       setLoading(false);
     }
@@ -54,7 +55,15 @@ export default function NoticeList() {
           </svg>
         </div>
       ) : error ? (
-        <p className="text-center text-red-600 font-semibold mt-6">{error}</p>
+        <div className="text-center text-red-600 font-semibold mt-6">
+          <p>{error}</p>
+          <button
+            onClick={fetchNotices} // Retry button
+            className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-200"
+          >
+            Retry
+          </button>
+        </div>
       ) : notices.length > 0 ? (
         <div>
           <h2 className="text-3xl font-bold mt-8 text-center text-sky-900 border-b-2 border-orange-300">

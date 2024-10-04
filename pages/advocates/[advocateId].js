@@ -1,31 +1,59 @@
 // pages/advocates/[advocateId].js
 import { useRouter } from "next/router";
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
   const { advocateId } = params;
 
-  const response = await fetch(
-    `https://www.chapaibar.com/api/advocates?advocateId=${advocateId}`
-  );
-  const advocate = await response.json();
+  try {
+    const response = await fetch(
+      `https://www.chapaibar.com/api/advocates?advocateId=${advocateId}`
+    );
+    const advocate = await response.json();
 
-  if (!advocate || advocate.error) {
+    if (!advocate || advocate.error) {
+      return {
+        notFound: true, // Trigger a 404 page if advocate is not found
+      };
+    }
+
     return {
-      notFound: true, // Will trigger a 404 page if advocate is not found
+      props: {
+        advocate,
+      },
+      revalidate: 60, // Page will revalidate every 60 seconds
+    };
+  } catch (error) {
+    return {
+      notFound: true, // Handle errors by returning a 404
     };
   }
+}
 
-  return {
-    props: {
-      advocate,
-    },
-  };
+// Get the list of dynamic routes to pre-render
+export async function getStaticPaths() {
+  try {
+    const res = await fetch("https://www.chapaibar.com/api/advocates");
+    const advocates = await res.json();
+
+    // Get the paths we want to pre-render based on advocateId
+    const paths = advocates.map((advocate) => ({
+      params: { advocateId: advocate.advocateId.toString() }, // Dynamic path
+    }));
+
+    // We'll pre-render only these paths at build time
+    return { paths, fallback: true }; // Enable fallback for dynamic paths
+  } catch (error) {
+    return {
+      paths: [],
+      fallback: true, // Handle error, still enable fallback mode
+    };
+  }
 }
 
 export default function AdvocateDetails({ advocate }) {
   const router = useRouter();
 
-  // Optional: Handle navigation and loading state
+  // Optional: Handle fallback state while pre-rendering the page
   if (router.isFallback) {
     return <div>Loading...</div>;
   }

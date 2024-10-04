@@ -1,7 +1,6 @@
 import EmployeeTable from "@/components/EmployeeTable";
-import Link from "next/link";
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const response = await fetch("https://www.chapaibar.com/api/employees");
   const employees = await response.json();
 

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
   const { employeeId } = params;
 
   const response = await fetch(
@@ -18,6 +18,27 @@ export async function getServerSideProps({ params }) {
       employee,
     },
   };
+}
+
+// Get the list of dynamic routes to pre-render
+export async function getStaticPaths() {
+  try {
+    const res = await fetch("https://www.chapaibar.com/api/employees");
+    const employees = await res.json();
+
+    // Get the paths we want to pre-render based on employeeId
+    const paths = employees.map((employee) => ({
+      params: { employeeId: employee.employeeId.toString() }, // Dynamic path
+    }));
+
+    // We'll pre-render only these paths at build time
+    return { paths, fallback: true }; // Enable fallback for dynamic paths
+  } catch (error) {
+    return {
+      paths: [],
+      fallback: true, // Handle error, still enable fallback mode
+    };
+  }
 }
 
 export default function Employee({ employee }) {

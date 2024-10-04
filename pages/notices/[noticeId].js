@@ -1,7 +1,7 @@
 // pages/notices/[noticeId].js
 import { useRouter } from "next/router";
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
   const { noticeId } = params;
 
   try {
@@ -44,6 +44,26 @@ export async function getServerSideProps({ params }) {
     console.error("Error fetching notice:", error);
     return {
       notFound: true, // Trigger a 404 page if there's an error
+    };
+  }
+}
+
+export async function getStaticPaths() {
+  try {
+    const res = await fetch("https://www.chapaibar.com/api/notices");
+    const notices = await res.json();
+
+    // Get the paths we want to pre-render based on noticeId
+    const paths = notices.map((notice) => ({
+      params: { noticeId: notice.noticeId.toString() }, // Dynamic path
+    }));
+
+    // We'll pre-render only these paths at build time
+    return { paths, fallback: true }; // Enable fallback for dynamic paths
+  } catch (error) {
+    return {
+      paths: [],
+      fallback: true, // Handle error, still enable fallback mode
     };
   }
 }
