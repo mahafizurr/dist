@@ -10,7 +10,7 @@ const Header = () => {
     <>
       <div className="container mx-auto">
         {/* Top Contact Bar */}
-        <div className="flex flex-col md:flex-row justify-center items-center border-b-2 border-orange-300 px-4 py-2 bg-gray-100 text-green-900 text-sm md:text-base">
+        <div className="flex sm:flex-row md:flex-row justify-center items-center border-b-2 border-orange-300 px-4 py-2 bg-gray-100 text-green-900 text-sm md:text-base">
           <div className="flex items-center space-x-2 md:space-x-4">
             <FontAwesomeIcon icon={faPhoneAlt} aria-hidden="true" />
             <span className="text-xs md:text-sm lg:text-base">

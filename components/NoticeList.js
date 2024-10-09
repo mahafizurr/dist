@@ -82,7 +82,7 @@ export default function NoticeList() {
                 key={notice.id}
                 className="border border-gray-200 p-6 rounded-md shadow-lg bg-white hover:shadow-xl transition-shadow duration-200 ease-in-out"
               >
-                <Link href={`/notices/${notice.id}`}>
+                <Link href={`/notices`}>
                   <h2 className="text-xl font-bold text-gray-800 mb-2 cursor-pointer hover:text-sky-600 transition-colors duration-200">
                     {notice.file_name}
                   </h2>
