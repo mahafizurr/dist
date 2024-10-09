@@ -967,8 +967,8 @@ const advocatedata = [
     photo: "/assets/09/Zohorul Islam  01719745237.jpg",
     fatherName: "MD. NAZRUL ISLAM",
     address: "Moharajpur, Chapainawabganj Sadar, Chapainawabganj",
-    dateofJoining: "15-03-1997",
-    dateofEnrollment: "01-04-1995",
+    dateofJoining: "31-08-1997",
+    dateofEnrollment: "06-08-1997",
   },
   {
     userId: 89,

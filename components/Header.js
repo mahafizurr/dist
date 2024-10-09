@@ -41,7 +41,8 @@ const Header = () => {
           <ul className="flex justify-center items-center bg-sky-950 p-2 md:p-3 shadow-md space-x-2 md:space-x-4 lg:space-x-6">
             {[
               { name: "Home", path: "/" },
-              { name: "Member Directory", path: "/advocates" },
+              { name: "Committee", path: "/committee" },
+              { name: "Members", path: "/advocates" },
               { name: "Employee", path: "/employees" },
               { name: "Notices", path: "/notices" },
               { name: "Contact", path: "/contact" },
