@@ -10,7 +10,10 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Function to fetch notices
 const getNotices = async () => {
-  const { data, error } = await supabase.from("dist_data_table").select("*");
+  const { data, error } = await supabase
+    .from("dist_data_table")
+    .select("*")
+    .order("id", { ascending: false });
   if (error) throw new Error(error.message);
   return data;
 };
@@ -25,12 +28,12 @@ const createNotice = async (notice) => {
 };
 
 export default async function handler(req, res) {
-  const { noticeId } = req.query;
+  const { id } = req.query;
 
   if (req.method === "GET") {
-    if (noticeId) {
+    if (id) {
       const notices = await getNotices();
-      const notice = notices.find((notice) => notice.id === parseInt(noticeId));
+      const notice = notices.find((notice) => notice.id === parseInt(id));
 
       if (!notice) {
         return res.status(404).json({ error: "Notice not found" });
@@ -38,7 +41,7 @@ export default async function handler(req, res) {
       return res.status(200).json(notice);
     }
 
-    // Return all notices if no noticeId is provided
+    // Return all notices if no id is provided
     const notices = await getNotices();
     return res.status(200).json(notices);
   } else if (req.method === "POST") {
