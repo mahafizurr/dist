@@ -1773,7 +1773,7 @@ const advocatedata = [
     name: "MD. MASIR ALI ",
     mobileNumber: "+8801715844811",
     photo: "/assets/17/Masir Ali  01715844811.jpg",
-    fatherName: "MD. ABDUR RAHMAN",
+    fatherName: "MD. ABDUR RAZZAQ",
     address: "88, Shibtala, Chapainawabganj sadar, Chapainawabganj",
     dateofJoining: "22-10-2014",
     dateofEnrollment: "18-10-2014",
