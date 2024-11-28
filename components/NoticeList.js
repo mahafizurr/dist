@@ -81,9 +81,14 @@ export default function NoticeList() {
                 key={notice.id}
                 className="border border-gray-200 p-6 rounded-md shadow-lg bg-white hover:shadow-xl transition-shadow duration-200 ease-in-out"
               >
-                <h2 className="text-xl font-bold text-gray-800 mb-2 cursor-pointer hover:text-sky-600 transition-colors duration-200">
+                <a
+                  href={notice.file_url} // Replace with the actual property containing the file URL
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xl font-bold text-gray-800 mb-2 cursor-pointer hover:text-sky-600 transition-colors duration-200"
+                >
                   {notice.file_name}
-                </h2>
+                </a>
 
                 <p className="text-sm text-gray-500">
                   {new Date(notice.created_at).toLocaleDateString("en-US", {

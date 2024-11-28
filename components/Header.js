@@ -26,13 +26,13 @@ const Header = () => {
         </div>
 
         {/* Logo Section */}
-        <div className="grid justify-center mt-2 md:mt-4 animate-fadeIn">
+        <div className="grid justify-center ">
           <img
             src="/headerlogo.png"
             alt="Chapai Bar logo"
             width={728}
             height={90}
-            className="mx-auto w-3/4 md:w-1/2 transition-transform duration-500 ease-in-out hover:scale-110"
+            className="mx-auto w-3/4 md:w-1/2"
           />
         </div>
 
