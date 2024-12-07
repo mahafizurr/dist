@@ -20,7 +20,7 @@ export async function getStaticProps({ params }) {
       props: {
         advocate,
       },
-      revalidate: 60, // Page will revalidate every 60 seconds
+      revalidate: 10, // Page will revalidate every 10 seconds
     };
   } catch (error) {
     return {

@@ -28,7 +28,7 @@ const Header = () => {
         {/* Logo Section */}
         <div className="grid justify-center ">
           <img
-            src="/headerlogo.png"
+            src="/headerlogo.jpg"
             alt="Chapai Bar logo"
             width={728}
             height={90}
