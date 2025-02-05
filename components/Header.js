@@ -65,7 +65,7 @@ const Header = () => {
             <img
               src="/banner.jpg"
               alt="Banner"
-              className="w-full h-40 md:h-64 lg:h-80 xl:h-96 object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+              className="w-full h-40 md:h-64 lg:h-80 xl:h-96 object-cover"
             />
           </div>
         )}

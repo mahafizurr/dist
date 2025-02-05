@@ -4,7 +4,7 @@ const employees = [
     name: "ALI HAIDAR",
     designation: "Accountant Cum-Computer Operator",
     mobile: "01711202824",
-    img: "/stafs/ali-haider-two.jpg",
+    img: "/stafs/ali-haider-two.jpeg",
     fatherName: "ABDUL HOQUE",
     address: "Baliaghatta, Chowhodditola, Godagari, Rajshahi",
   },
