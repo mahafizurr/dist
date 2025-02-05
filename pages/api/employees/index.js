@@ -32,7 +32,7 @@ const employees = [
     name: "MD. ATAUR RAHMAN (BABU)",
     designation: "Mlss",
     mobile: "01712362386",
-    img: "/stafs/04. Ataur Rahman Babu.jpg",
+    img: "/stafs/Ataur Rahman Babu.jpeg",
     fatherName: "LATE FOZLUR RAHMAN",
     address:
       "Professorpara College Road, Chapainawabganj Sadar, Chapainawabganj",
