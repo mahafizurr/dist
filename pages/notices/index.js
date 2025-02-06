@@ -1,14 +1,24 @@
 import NoticeTable from "@/components/NoticeTable";
+import axios from "axios";
 
 export async function getStaticProps() {
-  const response = await fetch("https://www.chapaibar.com/api/notices");
-  const notices = await response.json();
+  try {
+    const response = await axios.get("https://www.chapaibar.com/api/notices");
+    const notices = response.data;
 
-  return {
-    props: {
-      notices,
-    },
-  };
+    return {
+      props: {
+        notices,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching notices:", error);
+    return {
+      props: {
+        notices: [],
+      },
+    };
+  }
 }
 
 export default function Notice({ notices }) {

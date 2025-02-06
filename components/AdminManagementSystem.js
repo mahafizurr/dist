@@ -12,7 +12,7 @@ export default function AdminManagementSystem() {
   const fetchFiles = async () => {
     const { data, error } = await supabase.from("dist_data_table").select("*");
     if (error) {
-      console.error("Error fetching files:", error);
+      console.error("Error fetching files:", error.message);
     } else {
       setFiles(data);
     }
@@ -41,7 +41,7 @@ export default function AdminManagementSystem() {
       const filePath = `${fileName}`;
 
       // Upload file to Supabase storage
-      const { data: storageData, error: storageError } = await supabase.storage
+      const { error: storageError } = await supabase.storage
         .from("dist_upload_file")
         .upload(filePath, file);
 
@@ -56,7 +56,7 @@ export default function AdminManagementSystem() {
       const publicURL = publicURLData.publicUrl;
 
       // Insert file info into the database
-      const { data: insertData, error: insertError } = await supabase
+      const { error: insertError } = await supabase
         .from("dist_data_table")
         .insert([{ file_name: title, file_url: publicURL }]);
 
@@ -100,7 +100,7 @@ export default function AdminManagementSystem() {
 
       fetchFiles(); // Fetch the updated file list
     } catch (error) {
-      console.error("Error deleting file:", error);
+      console.error("Error deleting file:", error.message);
     }
   };
 
@@ -193,7 +193,7 @@ export default function AdminManagementSystem() {
             </div>
             <button
               onClick={() =>
-                handleDeleteWithConfirmation(fileItem.id, fileItem.file_url)
+                handleDeleteWithConfirmation(fileItem.id, fileItem.file_name)
               }
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >

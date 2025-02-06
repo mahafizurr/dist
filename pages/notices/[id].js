@@ -1,25 +1,21 @@
-// pages/notices/[id].js
 import { useRouter } from "next/router";
+import axios from "axios";
 
 // Fetch individual notice data based on id
 export async function getStaticProps({ params }) {
   const { id } = params;
 
   try {
-    const response = await fetch(`https://www.chapaibar.com/notices?id=${id}`);
+    const response = await axios.get(
+      `https://www.chapaibar.com/notices?id=${id}`
+    );
 
     // Check if the response is successful
-    if (!response.ok) {
+    if (response.status !== 200) {
       return { notFound: true }; // Trigger a 404 page for server errors
     }
 
-    // Check if the response is JSON
-    const contentType = response.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      return { notFound: true }; // Trigger a 404 page if not JSON
-    }
-
-    const notice = await response.json();
+    const notice = response.data;
 
     // If the notice data is invalid
     if (!notice || notice.error) {
@@ -40,8 +36,8 @@ export async function getStaticProps({ params }) {
 // Fetch paths of available notices
 export async function getStaticPaths() {
   try {
-    const res = await fetch("https://www.chapaibar.com/api/notices");
-    const notices = await res.json();
+    const response = await axios.get("https://www.chapaibar.com/api/notices");
+    const notices = response.data;
 
     // Create dynamic paths
     const paths = notices.map((notice) => ({
