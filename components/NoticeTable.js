@@ -37,12 +37,13 @@ const NoticeTable = ({ notices = [] }) => {
               {notice.file_name}
             </h2>
             <p className="text-sm text-gray-500">
-              {new Date(notice.created_at).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "2-digit",
+              {new Date(notice.created_at).toLocaleDateString("en-GB", {
                 day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
               })}
             </p>
+
             <div className="mt-4">{getFilePreview(notice.file_url)}</div>
             <div className="mt-6 flex space-x-4">
               <a
