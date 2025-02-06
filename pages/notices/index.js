@@ -1,7 +1,7 @@
 import NoticeTable from "@/components/NoticeTable";
 import axios from "axios";
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   try {
     const response = await axios.get("https://www.chapaibar.com/api/notices");
     const notices = response.data;

@@ -1,4 +1,3 @@
-// components/NoticeTable.js
 import React from "react";
 
 const getFilePreview = (fileUrl) => {
@@ -34,12 +33,9 @@ const NoticeTable = ({ notices = [] }) => {
             key={notice.id}
             className="border border-gray-200 p-6 rounded-md shadow-lg bg-white"
           >
-            {/* File Name */}
             <h2 className="text-xl font-bold text-gray-800 mb-2">
               {notice.file_name}
             </h2>
-
-            {/* Date */}
             <p className="text-sm text-gray-500">
               {new Date(notice.created_at).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -47,11 +43,7 @@ const NoticeTable = ({ notices = [] }) => {
                 day: "2-digit",
               })}
             </p>
-
-            {/* File Preview */}
             <div className="mt-4">{getFilePreview(notice.file_url)}</div>
-
-            {/* Action Buttons */}
             <div className="mt-6 flex space-x-4">
               <a
                 href={notice.file_url}
@@ -72,12 +64,10 @@ const NoticeTable = ({ notices = [] }) => {
           </div>
         ))
       ) : (
-        <p colSpan="4" className="px-6 py-4 text-sm text-center">
-          No notices available
-        </p>
+        <p className="px-6 py-4 text-sm text-center">No notices available</p>
       )}
     </div>
   );
 };
 
-export default NoticeTable; // Ensure this line is correct
+export default NoticeTable;
