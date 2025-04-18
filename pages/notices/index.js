@@ -1,4 +1,4 @@
-import NoticeTable from "@/components/NoticeTable";
+import NoticeTable from "@/components/Notice";
 import axios from "axios";
 
 export async function getServerSideProps() {
