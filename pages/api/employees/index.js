@@ -6,7 +6,7 @@ const employees = [
     mobile: "01711202824",
     img: "/stafs/ali-haider-two.jpeg",
     fatherName: "ABDUL HOQUE",
-    address: "Baliaghatta, Chowhodditola, Godagari, Rajshahi",
+    address: "Baliaghatta, Godagari, Rajshahi",
   },
   {
     id: 2,
